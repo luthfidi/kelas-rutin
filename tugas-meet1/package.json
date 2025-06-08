@@ -1,0 +1,26 @@
+{
+  "name": "monad-digitalwallet-kampus",
+  "version": "1.0.0", 
+  "main": "index.js",
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "test": "npx hardhat test",
+    "test:coverage": "npx hardhat coverage",
+    "deploy:local": "npx hardhat run scripts/deploy-digitalwallet.ts --network hardhat",
+    "deploy:testnet": "npx hardhat run scripts/deploy-digitalwallet.ts --network monadTestnet",
+    "deploy:akademik:local": "npx hardhat run scripts/deploy-sistemakademik.ts --network hardhat",
+    "deploy:akademik:testnet": "npx hardhat run scripts/deploy-sistemakademik.ts --network monadTestnet",
+    "node": "npx hardhat node"
+  },
+  "keywords": ["digital wallet", "kampus", "blockchain", "monad"],
+  "author": "",
+  "license": "MIT",
+  "description": "Digital Wallet Kampus smart contract on Monad Testnet",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@nomicfoundation/hardhat-verify": "^2.0.13", 
+    "hardhat": "^2.24.2",
+    "hardhat-gas-reporter": "^2.0.0",
+    "solidity-coverage": "^0.8.0"
+  }
+}
