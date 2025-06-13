@@ -10,13 +10,14 @@ const config: HardhatUserConfig = {
     version: "0.8.26",
     settings: {
       metadata: {
-        bytecodeHash: "none",      // ⬅ prevents IPFS-hash mismatch
-        useLiteralContent: true,   // ⬅ embeds the full source in metadata
+        bytecodeHash: "none",
+        useLiteralContent: true,
       },
       optimizer: {
         enabled: true,
-        runs: 200
-      }
+        runs: 1000
+      },
+      viaIR: true
     }
   },
   sourcify: {
@@ -34,7 +35,8 @@ const config: HardhatUserConfig = {
       url: "https://testnet-rpc.monad.xyz/",
       chainId: 10143,
       accounts: vars.has("PRIVATE_KEY") ? [`0x${vars.get("PRIVATE_KEY")}`] : [],
-      gasPrice: "auto",
+      gasPrice: 1000000000,
+      gas: 1000000 
     }
   },
   etherscan: {
