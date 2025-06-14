@@ -1,0 +1,46 @@
+{
+  "name": "campus-digital-tokens",
+  "version": "1.0.0",
+  "description": "ERC Suite Challenge - Digital Campus Token Ecosystem",
+  "main": "index.js",
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "deploy:monad": "npx hardhat ignition deploy ignition/modules/TokenSuite-Simple.js --network monad",
+    "deploy:sepolia": "npx hardhat ignition deploy ignition/modules/TokenSuite-Simple.js --network sepolia",
+    "deploy:local": "npx hardhat ignition deploy ignition/modules/TokenSuite-Simple.js --network localhost",
+    "setup": "npx hardhat run scripts/setup-after-deploy.js --network monad",
+    "setup:sepolia": "npx hardhat run scripts/setup-after-deploy.js --network sepolia",
+    "verify": "npx hardhat run scripts/verify-contracts.js --network monad",
+    "verify:sepolia": "npx hardhat run scripts/verify-contracts.js --network sepolia",
+    "verify:ignition": "npx hardhat ignition verify TokenSuiteModule --network monad",
+    "deploy-and-setup": "npm run deploy:monad && npm run setup && npm run verify",
+    "test": "npx hardhat test",
+    "node": "npx hardhat node",
+    "clean": "npx hardhat clean"
+  },
+  "keywords": [
+    "blockchain",
+    "solidity",
+    "erc20",
+    "erc721",
+    "erc1155",
+    "hardhat",
+    "ignition"
+  ],
+  "author": "BlockDevId Student",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
+    "@nomicfoundation/hardhat-ethers": "^3.0.0",
+    "@nomicfoundation/hardhat-ignition": "^0.15.0",
+    "@nomicfoundation/hardhat-ignition-ethers": "^0.15.0",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@nomicfoundation/hardhat-verify": "^2.0.0",
+    "dotenv": "^16.4.5",
+    "hardhat": "^2.22.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0"
+  }
+}

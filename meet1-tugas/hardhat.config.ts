@@ -15,9 +15,8 @@ const config: HardhatUserConfig = {
       },
       optimizer: {
         enabled: true,
-        runs: 1000
-      },
-      viaIR: true
+        runs: 200
+      }
     }
   },
   sourcify: {
@@ -26,17 +25,17 @@ const config: HardhatUserConfig = {
     browserUrl: "https://testnet.monadexplorer.com",
   },
   networks: {
-    // Konfigurasi untuk localhost development
     hardhat: {
       chainId: 31337,
     },
-    // Konfigurasi untuk Monad Testnet
     monadTestnet: {
       url: "https://testnet-rpc.monad.xyz/",
       chainId: 10143,
       accounts: vars.has("PRIVATE_KEY") ? [`0x${vars.get("PRIVATE_KEY")}`] : [],
-      gasPrice: 1000000000,
-      gas: 1000000 
+      // Fix gas price settings
+      gasPrice: 20000000000, // 20 gwei (naikan dari auto)
+      gas: 2000000, // 2M gas limit
+      timeout: 60000 // 60 second timeout
     }
   },
   etherscan: {
