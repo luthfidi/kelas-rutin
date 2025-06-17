@@ -1,0 +1,16 @@
+{
+  "network": "monadTestnet",
+  "chainId": 10143,
+  "deployer": "0x580B01f8CDf7606723c3BE0dD2AaD058F5aECa3d",
+  "timestamp": "2025-06-17T05:17:01.666Z",
+  "contract": {
+    "name": "CourseBadge",
+    "address": "0xc5481CFEBB3D730139739eC015aaA2B6DF036622",
+    "verified": true
+  },
+  "compiler": {
+    "version": "0.8.26",
+    "optimization": true,
+    "runs": 200
+  }
+}

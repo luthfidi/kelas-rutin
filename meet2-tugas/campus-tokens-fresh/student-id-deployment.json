@@ -1,0 +1,16 @@
+{
+  "network": "monadTestnet",
+  "chainId": 10143,
+  "deployer": "0x580B01f8CDf7606723c3BE0dD2AaD058F5aECa3d",
+  "timestamp": "2025-06-17T05:14:06.180Z",
+  "contract": {
+    "name": "StudentID",
+    "address": "0xDB27ca24d424455541B8CC3B8a9EE1BdaC6bF8E3",
+    "verified": true
+  },
+  "compiler": {
+    "version": "0.8.26",
+    "optimization": true,
+    "runs": 200
+  }
+}

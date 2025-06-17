@@ -1,0 +1,29 @@
+{
+  "name": "hardhat-project",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.24.3"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.3.0"
+  },
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "clean": "npx hardhat clean",
+    "test": "npx hardhat test",
+    "node": "npx hardhat node",
+    
+    "check:network": "npx hardhat run scripts/check-network.ts --network monadTestnet",
+    
+    "deploy:campus-credit": "npx hardhat run scripts/deploy-campus-credit.ts --network monadTestnet",
+    "deploy:student-id": "npx hardhat run scripts/deploy-student-id.ts --network monadTestnet",
+    "deploy:course-badge": "npx hardhat run scripts/deploy-course-badge.ts --network monadTestnet",
+    
+    "deploy:all": "npm run deploy:campus-credit && npm run deploy:student-id && npm run deploy:course-badge",
+    
+    "verify": "npx hardhat verify --network monadTestnet",
+    
+    "setup:env": "npx hardhat vars set PRIVATE_KEY",
+    "check:env": "npx hardhat vars get PRIVATE_KEY"
+  }
+}

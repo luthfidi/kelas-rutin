@@ -1,0 +1,16 @@
+{
+  "network": "monadTestnet",
+  "chainId": 10143,
+  "deployer": "0x580B01f8CDf7606723c3BE0dD2AaD058F5aECa3d",
+  "timestamp": "2025-06-17T05:03:07.704Z",
+  "contract": {
+    "name": "CampusCredit",
+    "address": "0xf23C8fdc60dC3f4dfe4A58E7194Da4dE96357208",
+    "verified": true
+  },
+  "compiler": {
+    "version": "0.8.26",
+    "optimization": true,
+    "runs": 200
+  }
+}
