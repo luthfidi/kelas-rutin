@@ -1,41 +1,57 @@
-require("@nomicfoundation/hardhat-toolbox");
-require("@nomicfoundation/hardhat-ignition-ethers");
-require("dotenv").config();
+import { HardhatUserConfig } from "hardhat/config";
+import "@nomicfoundation/hardhat-toolbox";
+import "@nomicfoundation/hardhat-verify";
+import { vars } from "hardhat/config";
+import "hardhat-gas-reporter";
+import "solidity-coverage";
 
-/** @type import('hardhat/config').HardhatUserConfig */
-module.exports = {
+const config: HardhatUserConfig = {
   solidity: {
-    version: "0.8.26",
+    version: "0.8.28",
     settings: {
+      metadata: {
+        bytecodeHash: "none",      // ⬅ prevents IPFS-hash mismatch
+        useLiteralContent: true,   // ⬅ embeds the full source in metadata
+      },
       optimizer: {
         enabled: true,
-        runs: 200,
-      },
-    },
+        runs: 200
+      }
+    }
+  },
+  sourcify: {
+    enabled: true,
+    apiUrl: "https://sourcify-api-monad.blockvision.org",
+    browserUrl: "https://testnet.monadexplorer.com",
   },
   networks: {
+    // Konfigurasi untuk localhost development
     hardhat: {
       chainId: 31337,
     },
-    localhost: {
-      url: "http://127.0.0.1:8545",
-      chainId: 31337,
-    },
-    monad: {
-      url: process.env.MONAD_RPC_URL || "https://testnet-rpc.monad.xyz",
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+    // Konfigurasi untuk Monad Testnet
+    monadTestnet: {
+      url: "https://testnet-rpc.monad.xyz/",
       chainId: 10143,
-    },
-    sepolia: {
-      url: process.env.SEPOLIA_RPC_URL || "https://sepolia.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
-      chainId: 11155111,
-    },
+      accounts: vars.has("PRIVATE_KEY") ? [`0x${vars.get("PRIVATE_KEY")}`] : [],
+      gasPrice: "auto",
+    }
   },
   etherscan: {
-    apiKey: {
-      sepolia: process.env.ETHERSCAN_API_KEY || "",
-      monad: "abc123", // Placeholder for Monad
-    },
+    enabled: false,
   },
+  gasReporter: {
+    enabled: true,
+    currency: 'USD',
+    outputFile: "gas-report.txt",
+    noColors: true,
+  },
+  paths: {
+    sources: "./contracts",
+    tests: "./test",
+    cache: "./cache",
+    artifacts: "./artifacts"
+  }
 };
+
+export default config;
