@@ -41,6 +41,21 @@ Repository ini berisi kumpulan tugas dan project dari Kelas Rutin BlockDevId yan
 
 ---
 
+### Meet 6 - DEFI
+**Fokus**: DeFi
+
+#### Tugas yang Diselesaikan:
+1. **SimpleDEX**
+   - Contract Address: [0x493185ee6e21b69a6782960E0f35aEEfF2a2F8a2](https://testnet.monadexplorer.com/address/0x493185ee6e21b69a6782960E0f35aEEfF2a2F8a2?tab=Contract)
+
+2. **CampusCoin**
+   - Contract Address: [0x39b5aC632F550b0f3cD39180c0912e29DBc68De3](https://testnet.monadexplorer.com/address/0x39b5aC632F550b0f3cD39180c0912e29DBc68De3?tab=Contract)
+
+3. **MockUSDC**
+   - Contract Address: [0x3DA1769802400490E47C8D20fee171D81c89d208](https://testnet.monadexplorer.com/address/0x3DA1769802400490E47C8D20fee171D81c89d208?tab=Contract)
+
+---
+
 ## 🛠 Teknologi yang Digunakan
 - **Blockchain**: Monad Testnet
 - **Smart Contract Language**: Solidity
@@ -50,6 +65,7 @@ Repository ini berisi kumpulan tugas dan project dari Kelas Rutin BlockDevId yan
 ## 📝 Progress Pembelajaran
 - ✅ **Meet 1**: Web3 Fundamentals - 3 Smart Contracts deployed
 - ✅ **Meet 2**: Smart Contract Modular Architecture - 4 Smart Contracts deployed
+- ✅ **Meet 6**: Final Projects - 3 Smart Contracts deployed
 
 ## 🔗 Useful Links
 - [BlockDevId Documentation](https://docs.ethjkt.com/)
