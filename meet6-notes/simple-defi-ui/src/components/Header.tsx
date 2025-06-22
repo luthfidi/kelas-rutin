@@ -7,7 +7,7 @@ const Header = () => {
         <div className="flex items-center space-x-4">
           <div className="relative">
             <div className="flex items-center space-x-1 p-2 rounded-xl bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-white/10">
-              <img src="/nad-trade-logo.png" alt="Nad Trade Logo" className="w-8 h-8" />
+              <img src="/src/assets/image.png" alt="d Trade Logo" className="w-8 h-8" />
             </div>
           </div>
           <div>

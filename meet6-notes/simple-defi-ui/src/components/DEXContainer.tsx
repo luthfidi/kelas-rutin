@@ -51,7 +51,7 @@ const DEXContainer = () => {
       <main className="min-h-screen flex items-center justify-center px-6">
         <div className="glass card-hover rounded-2xl p-12 max-w-2xl mx-auto text-center">
           <div className="text-8xl mb-6 float-animation">
-            <img src="/nad-trade-logo.png" alt="Nad Trade Logo" className="w-24 h-24 mx-auto mb-4" />
+            <img src="/src/assets/image.png" alt="Nad Trade Logo" className="w-24 h-24 mx-auto mb-4" />
           </div>
           <h2 className="text-4xl font-bold mb-6 text-gradient-monad font-inter">
             Welcome to Nad Trade
