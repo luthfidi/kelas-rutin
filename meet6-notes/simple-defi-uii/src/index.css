@@ -1,0 +1,250 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import "tailwindcss";
+
+:root {
+  /* Monad Brand Colors */
+  --monad-off-white: #fbfaf9;
+  --monad-purple: #836ef9;
+  --monad-blue: #200052;
+  --monad-berry: #a0055d;
+  --monad-black: #0e100f;
+  --monad-white: #ffffff;
+
+  /* DeFi specific colors */
+  --success-green: #10b981;
+  --success-green-light: rgba(16, 185, 129, 0.2);
+  --warning-yellow: #f59e0b;
+  --warning-yellow-light: rgba(245, 158, 11, 0.2);
+  --error-red: #ef4444;
+  --error-red-light: rgba(239, 68, 68, 0.2);
+
+  /* Derived colors for UI */
+  --monad-purple-light: rgba(131, 110, 249, 0.8);
+  --monad-purple-dark: rgba(131, 110, 249, 0.2);
+  --monad-berry-light: rgba(160, 5, 93, 0.8);
+  --monad-berry-dark: rgba(160, 5, 93, 0.2);
+  --monad-blue-light: rgba(32, 0, 82, 0.8);
+  --monad-blue-dark: rgba(32, 0, 82, 0.3);
+
+  /* UI System Colors */
+  --bg-primary: var(--monad-blue);
+  --bg-secondary: var(--monad-black);
+  --bg-tertiary: rgba(32, 0, 82, 0.6);
+  --text-primary: var(--monad-off-white);
+  --text-secondary: var(--monad-white);
+  --text-muted: rgba(251, 250, 249, 0.7);
+  --border-primary: rgba(131, 110, 249, 0.3);
+  --border-secondary: rgba(251, 250, 249, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, var(--monad-blue) 0%, var(--monad-black) 50%, #1a0040 100%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--monad-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--monad-purple);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--monad-berry);
+}
+
+/* Animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, rgba(251, 250, 249, 0.05) 0px, rgba(251, 250, 249, 0.15) 40px, rgba(251, 250, 249, 0.05) 80px);
+  background-size: 400px;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-success {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+.pulse-success {
+  animation: pulse-success 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes glow-purple {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(131, 110, 249, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(131, 110, 249, 0.6), 0 0 30px rgba(131, 110, 249, 0.4);
+  }
+}
+
+@keyframes glow-berry {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(160, 5, 93, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(160, 5, 93, 0.6), 0 0 30px rgba(160, 5, 93, 0.4);
+  }
+}
+
+@keyframes glow-success {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(16, 185, 129, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.6), 0 0 30px rgba(16, 185, 129, 0.4);
+  }
+}
+
+.glow-purple {
+  animation: glow-purple 2s ease-in-out infinite;
+}
+
+.glow-berry {
+  animation: glow-berry 2s ease-in-out infinite;
+}
+
+.glow-success {
+  animation: glow-success 2s ease-in-out infinite;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(14, 16, 15, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(251, 250, 249, 0.1);
+}
+
+.glass-dark {
+  background: rgba(32, 0, 82, 0.3);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(131, 110, 249, 0.2);
+}
+
+/* Button hover effects */
+.btn-primary {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Input styles */
+.input-primary {
+  background: rgba(14, 16, 15, 0.5);
+  border: 1px solid rgba(251, 250, 249, 0.2);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.input-primary:focus {
+  outline: none;
+  border-color: var(--monad-purple);
+  box-shadow: 0 0 0 3px rgba(131, 110, 249, 0.1);
+}
+
+/* Monad brand gradients */
+.gradient-monad-primary {
+  background: linear-gradient(135deg, var(--monad-purple) 0%, var(--monad-berry) 100%);
+}
+
+.gradient-monad-secondary {
+  background: linear-gradient(135deg, var(--monad-blue) 0%, var(--monad-black) 100%);
+}
+
+.gradient-success {
+  background: linear-gradient(135deg, var(--success-green) 0%, #059669 100%);
+}
+
+.text-gradient-monad {
+  background: linear-gradient(135deg, var(--monad-purple) 0%, var(--monad-berry) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Loading spinner */
+.spinner {
+  border: 2px solid rgba(251, 250, 249, 0.3);
+  border-top: 2px solid var(--monad-purple);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Custom number input */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
