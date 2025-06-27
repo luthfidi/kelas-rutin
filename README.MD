@@ -77,3 +77,5 @@ Repository ini berisi kumpulan tugas dan project dari Kelas Rutin BlockDevId yan
 ---
 
 *Repository ini merupakan bagian dari pembelajaran blockchain development melalui program Kelas Rutin BlockDevId.*
+
+test
