@@ -1,0 +1,95 @@
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ZK Age Verification specific styles */
+.zk-age-app {
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+}
+
+.ktp-form-container {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.proof-display-container {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.verification-complete-container {
+  max-width: 32rem;
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Header specific styles */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(32, 0, 82, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(251, 250, 249, 0.1);
+}
+
+/* Footer if needed */
+.app-footer {
+  background: rgba(14, 16, 15, 0.8);
+  border-top: 1px solid rgba(251, 250, 249, 0.1);
+  padding: 1rem 0;
+  text-align: center;
+  color: rgba(251, 250, 249, 0.7);
+  font-size: 0.875rem;
+}
+
+/* RainbowKit customization */
+.iekbcc0 {
+  font-family: 'Inter', sans-serif !important;
+}
+
+.iekbcc0 button {
+  background: linear-gradient(135deg, var(--monad-purple) 0%, var(--monad-berry) 100%) !important;
+  border: none !important;
+  border-radius: 0.75rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.iekbcc0 button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 25px rgba(131, 110, 249, 0.3) !important;
+}
+
+/* React Hot Toast customization */
+.react-hot-toast {
+  font-family: 'Inter', sans-serif;
+}
+
+.react-hot-toast > div {
+  background: rgba(14, 16, 15, 0.9) !important;
+  color: var(--monad-off-white) !important;
+  border: 1px solid rgba(131, 110, 249, 0.3) !important;
+  border-radius: 0.75rem !important;
+  backdrop-filter: blur(12px) !important;
+}

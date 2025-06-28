@@ -1,0 +1,100 @@
+Invalid command
+snarkjs@0.7.5
+        Copyright (C) 2018  0kims association
+        This program comes with ABSOLUTELY NO WARRANTY;
+        This is free software, and you are welcome to redistribute it
+        under certain conditions; see the COPYING file in the official
+        repo directory at  https://github.com/iden3/snarkjs 
+
+Usage:
+        snarkjs <full command> ...  <options>
+   or   snarkjs <shortcut> ...  <options>
+
+Type snarkjs <command> --help to get more information for that command
+
+Full Command                  Description
+============                  =================
+powersoftau new               Starts a powers of tau ceremony
+     Usage:  snarkjs ptn <curve> <power> [powersoftau_0000.ptau]
+powersoftau contribute        creates a ptau file with a new contribution
+     Usage:  snarkjs ptc <powersoftau.ptau> <new_powersoftau.ptau>
+powersoftau export challenge  Creates a challenge
+     Usage:  snarkjs ptec <powersoftau_0000.ptau> [challenge]
+powersoftau challenge contributeContribute to a challenge
+     Usage:  snarkjs ptcc <curve> <challenge> [response]
+powersoftau import response   import a response to a ptau file
+     Usage:  snarkjs ptir <powersoftau_old.ptau> <response> <<powersoftau_new.ptau>
+powersoftau beacon            adds a beacon
+     Usage:  snarkjs ptb <old_powersoftau.ptau> <new_powersoftau.ptau> <beaconHash(Hex)> <numIterationsExp>
+powersoftau prepare phase2    Prepares phase 2. 
+     Usage:  snarkjs pt2 <powersoftau.ptau> <new_powersoftau.ptau>
+powersoftau convert           Convert ptau
+     Usage:  snarkjs ptcv <old_powersoftau.ptau> <new_powersoftau.ptau>
+powersoftau truncate          Generate different powers of tau with smaller sizes 
+     Usage:  snarkjs ptt <powersoftau.ptau>
+powersoftau verify            verifies a powers of tau file
+     Usage:  snarkjs ptv <powersoftau.ptau>
+powersoftau export json       Exports a power of tau file to a JSON
+     Usage:  snarkjs ptej <powersoftau_0000.ptau> <powersoftau_0000.json>
+r1cs info                     Print statistiscs of a circuit
+     Usage:  snarkjs ri [circuit.r1cs]
+r1cs print                    Print the constraints of a circuit
+     Usage:  snarkjs rp [circuit.r1cs] [circuit.sym]
+r1cs export json              Export r1cs to JSON file
+     Usage:  snarkjs rej [circuit.r1cs] [circuit.json]
+wtns calculate                Caclculate specific witness of a circuit given an input
+     Usage:  snarkjs wc [circuit.wasm] [input.json] [witness.wtns]
+wtns debug                    Calculate the witness with debug info.
+     Usage:  snarkjs wd [circuit.wasm] [input.json] [witness.wtns] [circuit.sym]
+wtns export json              Calculate the witness with debug info.
+     Usage:  snarkjs wej [witness.wtns] [witnes.json]
+wtns check                    Check if a specific witness of a circuit fulfills the r1cs constraints
+     Usage:  snarkjs wchk [circuit.r1cs] [[witness.wtns]
+zkey contribute               creates a zkey file with a new contribution
+     Usage:  snarkjs zkc <circuit_old.zkey> <circuit_new.zkey>
+zkey export bellman           Export a zKey to a MPCParameters file compatible with kobi/phase2 (Bellman)
+     Usage:  snarkjs zkeb <circuit_xxxx.zkey> [circuit.mpcparams]
+zkey bellman contribute       contributes to a challenge file in bellman format
+     Usage:  snarkjs zkbc <curve> <circuit.mpcparams> <circuit_response.mpcparams>
+zkey import bellman           Export a zKey to a MPCParameters file compatible with kobi/phase2 (Bellman) 
+     Usage:  snarkjs zkib <circuit_old.zkey> <circuit.mpcparams> <circuit_new.zkey>
+zkey beacon                   adds a beacon
+     Usage:  snarkjs zkb <circuit_old.zkey> <circuit_new.zkey> <beaconHash(Hex)> <numIterationsExp>
+zkey verify r1cs              Verify zkey file contributions and verify that matches with the original circuit.r1cs and ptau
+     Usage:  snarkjs zkv [circuit.r1cs] [powersoftau.ptau] [circuit_final.zkey]
+zkey verify init              Verify zkey file contributions and verify that matches with the original circuit.r1cs and ptau
+     Usage:  snarkjs zkvi [circuit_0000.zkey] [powersoftau.ptau] [circuit_final.zkey]
+zkey export verificationkey   Exports a verification key
+     Usage:  snarkjs zkev [circuit_final.zkey] [verification_key.json]
+zkey export json              Exports a circuit key to a JSON file
+     Usage:  snarkjs zkej [circuit_final.zkey] [circuit_final.zkey.json]
+zkey export solidityverifier  Creates a verifier in solidity
+     Usage:  snarkjs zkesv [circuit_final.zkey] [verifier.sol]
+zkey export soliditycalldata  Generates call parameters ready to be called.
+     Usage:  snarkjs zkesc [public.json] [proof.json]
+groth16 setup                 Creates an initial groth16 pkey file with zero contributions
+     Usage:  snarkjs g16s [circuit.r1cs] [powersoftau.ptau] [circuit_0000.zkey]
+groth16 prove                 Generates a zk Proof from witness
+     Usage:  snarkjs g16p [circuit_final.zkey] [witness.wtns] [proof.json] [public.json]
+groth16 fullprove             Generates a zk Proof from input
+     Usage:  snarkjs g16f [input.json] [circuit_final.wasm] [circuit_final.zkey] [proof.json] [public.json]
+groth16 verify                Verify a zk Proof
+     Usage:  snarkjs g16v [verification_key.json] [public.json] [proof.json]
+plonk setup                   Creates an initial PLONK pkey 
+     Usage:  snarkjs pks [circuit.r1cs] [powersoftau.ptau] [circuit.zkey]
+plonk prove                   Generates a PLONK Proof from witness
+     Usage:  snarkjs pkp [circuit.zkey] [witness.wtns] [proof.json] [public.json]
+plonk fullprove               Generates a PLONK Proof from input
+     Usage:  snarkjs pkf [input.json] [circuit.wasm] [circuit.zkey] [proof.json] [public.json]
+plonk verify                  Verify a PLONK Proof
+     Usage:  snarkjs pkv [verification_key.json] [public.json] [proof.json]
+fflonk setup                  BETA version. Creates a FFLONK zkey from a circuit
+     Usage:  snarkjs ffs [circuit.r1cs] [powersoftau.ptau] [circuit.zkey]
+fflonk prove                  BETA version. Generates a FFLONK Proof from witness
+     Usage:  snarkjs ffp [circuit.zkey] [witness.wtns] [proof.json] [public.json]
+fflonk fullprove              BETA version. Generates a witness and the FFLONK Proof in the same command
+     Usage:  snarkjs fff [witness.json] [circuit.wasm] [circuit.zkey] [proof.json] [public.json]
+fflonk verify                 BETA version. Verify a FFLONK Proof
+     Usage:  snarkjs ffv [verification_key.json] [public.json] [proof.json]
+file info                     Check info of a binary file
+     Usage:  snarkjs fi [binary.file]

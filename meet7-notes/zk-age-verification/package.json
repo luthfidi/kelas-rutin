@@ -1,0 +1,43 @@
+{
+  "name": "zk-age-verification",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit",
+    "css-build": "tailwindcss -i ./src/index.css -o ./dist/output.css --watch",
+    "compile-circuit": "./scripts/compile-circuit.sh ageVerification"
+  },
+  "dependencies": {
+    "@noir-lang/backend_barretenberg": "^0.36.0",
+    "@noir-lang/noir_wasm": "^1.0.0-beta.7",
+    "@rainbow-me/rainbowkit": "^2.2.8",
+    "@tailwindcss/vite": "^4.1.11",
+    "@tanstack/react-query": "^5.81.5",
+    "circomlib": "^2.0.5",
+    "lucide-react": "^0.523.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-hot-toast": "^2.5.2",
+    "snarkjs": "^0.7.5",
+    "viem": "^2.31.4",
+    "wagmi": "^2.15.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.29.0",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.5.2",
+    "eslint": "^9.29.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.2.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.34.1",
+    "vite": "^6.3.5"
+  }
+}
