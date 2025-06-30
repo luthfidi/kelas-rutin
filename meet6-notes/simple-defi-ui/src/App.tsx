@@ -47,7 +47,7 @@ const monadTestnet: Chain = {
 // eslint-disable-next-line react-refresh/only-export-components
 export const config = getDefaultConfig({
   appName: 'Simple DEX',
-  projectId: 'YOUR_WALLETCONNECT_PROJECT_ID', // Dapatkan dari https://cloud.walletconnect.com
+  projectId: import.meta.env.VITE_WALLETCONNECT_PROJECT_ID || '1f2d078ead13b88fe9541028cd7b0368',
   chains: [monadTestnet],
   ssr: true,
 });
