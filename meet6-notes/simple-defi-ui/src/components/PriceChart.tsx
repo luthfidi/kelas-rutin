@@ -1,12 +1,13 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
-import { TrendingUp, TrendingDown, Minus } from "lucide-react"
+import { useState, useEffect, useMemo } from "react"
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from "recharts"
+import { TrendingUp, TrendingDown, Minus, Users, DollarSign, RefreshCw } from "lucide-react"
 import { usePoolData } from "../hooks/usePoolData"
-import { useWatchContractEvent, usePublicClient } from "wagmi"
+import { useRecentSwaps, useUserStats, useDailyVolume, useIndexerHealth, useManualRefresh } from "../hooks/useIndexerData"
+import { useWatchContractEvent, usePublicClient, useAccount } from "wagmi"
 import { SIMPLE_DEX_ABI, CONTRACTS } from "../constants"
-import { formatNumber, formatTime } from "../utils/formatters"
+import { formatNumber, formatTime, formatUSD } from "../utils/formatters"
 import type { PriceData } from "../types/defi"
 
 interface CustomTooltipProps {
@@ -37,13 +38,53 @@ interface LiquidityEvent {
 }
 
 const PriceChart = () => {
+  const { address } = useAccount()
   const { poolInfo, isLoading } = usePoolData()
   const [timeFrame, setTimeFrame] = useState<'1H' | '1D' | '1W' | '1M'>('1D')
   const [priceHistory, setPriceHistory] = useState<PriceData[]>([])
   const [volume24h, setVolume24h] = useState(0)
   const [isLoadingHistory, setIsLoadingHistory] = useState(false)
   
+  // Fetch data from indexer for analytics
+  const { data: recentSwaps, isLoading: swapsLoading } = useRecentSwaps(100)
+  const { data: userStats, isLoading: userLoading } = useUserStats(address)
+  const { data: dailyVolume, isLoading: volumeLoading } = useDailyVolume(7)
+  const { data: indexerHealth } = useIndexerHealth()
+  const { refreshAll } = useManualRefresh()
+
+  // Manual refresh state
+  const [isRefreshing, setIsRefreshing] = useState(false)
+  
   const publicClient = usePublicClient()
+
+  // Handle manual refresh
+  const handleRefresh = async () => {
+    setIsRefreshing(true)
+    try {
+      await refreshAll()
+      await fetchHistoricalData() // Also refresh chart data
+    } catch (error) {
+      console.error('Failed to refresh data:', error)
+    } finally {
+      setIsRefreshing(false)
+    }
+  }
+
+  // Calculate metrics from indexer data
+  const metrics = useMemo(() => {
+    if (!recentSwaps || !dailyVolume) return null
+
+    const total24hVolume = dailyVolume[0]?.volumeUSD || 0
+    const total24hTxs = dailyVolume[0]?.transactionCount || 0
+    const uniqueUsers = new Set(recentSwaps.map((swap: any) => swap.user)).size
+
+    return {
+      volume24h: total24hVolume,
+      transactions24h: total24hTxs,
+      uniqueUsers,
+      avgTradeSize: total24hTxs > 0 ? total24hVolume / total24hTxs : 0
+    }
+  }, [recentSwaps, dailyVolume])
 
   // Calculate real price from pool reserves
   const calculateRealPrice = (reserveA: bigint, reserveB: bigint) => {
@@ -401,7 +442,166 @@ const PriceChart = () => {
   const currentTVL = calculateTVL(poolInfo.reserveA, poolInfo.reserveB, currentRealPrice)
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-0">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-0 space-y-8">
+      {/* Analytics Dashboard */}
+      {metrics && (
+        <div className="glass rounded-2xl p-6 border border-white/10 shadow-2xl">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-xl font-bold" style={{ color: "#FBFAF9" }}>
+              📊 Real-time Analytics
+            </h3>
+            <div className="flex items-center gap-2">
+              <div className="text-sm" style={{ color: "rgba(251, 250, 249, 0.7)" }}>
+                Powered by Ponder Indexer
+              </div>
+              {indexerHealth && (
+                <div className={`w-2 h-2 rounded-full ${indexerHealth.isHealthy ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></div>
+              )}
+              <button
+                onClick={handleRefresh}
+                disabled={isRefreshing}
+                className="p-1 rounded hover:bg-white/10 transition-colors disabled:opacity-50"
+                title="Refresh data"
+              >
+                <RefreshCw className={`w-3 h-3 ${isRefreshing ? 'animate-spin' : ''}`} style={{ color: "rgba(251, 250, 249, 0.7)" }} />
+              </button>
+            </div>
+          </div>
+
+          {/* Metrics Cards */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div className="p-4 rounded-xl border" style={{
+              backgroundColor: "rgba(131, 110, 249, 0.1)",
+              borderColor: "rgba(131, 110, 249, 0.3)"
+            }}>
+              <DollarSign className="w-5 h-5 mb-2" style={{ color: "#836EF9" }} />
+              <div className="text-lg font-bold" style={{ color: "#FBFAF9" }}>
+                {formatUSD(metrics.volume24h)}
+              </div>
+              <div className="text-xs" style={{ color: "rgba(251, 250, 249, 0.7)" }}>
+                24h Volume
+              </div>
+            </div>
+
+            <div className="p-4 rounded-xl border" style={{
+              backgroundColor: "rgba(16, 185, 129, 0.1)",
+              borderColor: "rgba(16, 185, 129, 0.3)"
+            }}>
+              <TrendingUp className="w-5 h-5 mb-2" style={{ color: "#10B981" }} />
+              <div className="text-lg font-bold" style={{ color: "#FBFAF9" }}>
+                {metrics.transactions24h}
+              </div>
+              <div className="text-xs" style={{ color: "rgba(251, 250, 249, 0.7)" }}>
+                24h Transactions
+              </div>
+            </div>
+
+            <div className="p-4 rounded-xl border" style={{
+              backgroundColor: "rgba(160, 5, 93, 0.1)",
+              borderColor: "rgba(160, 5, 93, 0.3)"
+            }}>
+              <Users className="w-5 h-5 mb-2" style={{ color: "#A0055D" }} />
+              <div className="text-lg font-bold" style={{ color: "#FBFAF9" }}>
+                {metrics.uniqueUsers}
+              </div>
+              <div className="text-xs" style={{ color: "rgba(251, 250, 249, 0.7)" }}>
+                Unique Users
+              </div>
+            </div>
+
+            <div className="p-4 rounded-xl border" style={{
+              backgroundColor: "rgba(245, 158, 11, 0.1)",
+              borderColor: "rgba(245, 158, 11, 0.3)"
+            }}>
+              <TrendingUp className="w-5 h-5 mb-2" style={{ color: "#F59E0B" }} />
+              <div className="text-lg font-bold" style={{ color: "#FBFAF9" }}>
+                {formatUSD(metrics.avgTradeSize)}
+              </div>
+              <div className="text-xs" style={{ color: "rgba(251, 250, 249, 0.7)" }}>
+                Avg Trade Size
+              </div>
+            </div>
+          </div>
+
+          {/* Volume Chart */}
+          {!volumeLoading && dailyVolume && dailyVolume.length > 0 && (
+            <div className="h-64">
+              <h4 className="text-lg font-semibold mb-4" style={{ color: "#FBFAF9" }}>
+                7-Day Volume Trend
+              </h4>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={[...dailyVolume].reverse()}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(251, 250, 249, 0.1)" />
+                  <XAxis 
+                    dataKey="date" 
+                    stroke="rgba(251, 250, 249, 0.5)"
+                    fontSize={10}
+                  />
+                  <YAxis 
+                    stroke="rgba(251, 250, 249, 0.5)"
+                    fontSize={10}
+                  />
+                  <Tooltip 
+                    contentStyle={{
+                      backgroundColor: "rgba(14, 16, 15, 0.9)",
+                      border: "1px solid rgba(251, 250, 249, 0.2)",
+                      borderRadius: "8px",
+                      color: "#FBFAF9"
+                    }}
+                    formatter={(value: any) => [formatUSD(value), 'Volume']}
+                  />
+                  <Bar dataKey="volumeUSD" fill="#836EF9" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* User Stats */}
+      {address && userStats && (
+        <div className="glass rounded-2xl p-6 border border-white/10 shadow-2xl">
+          <h3 className="text-xl font-bold mb-4" style={{ color: "#FBFAF9" }}>
+            👤 Your Trading Statistics
+          </h3>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="text-center">
+              <div className="text-2xl font-bold mb-1" style={{ color: "#836EF9" }}>
+                {userStats.totalSwaps}
+              </div>
+              <div className="text-sm" style={{ color: "rgba(251, 250, 249, 0.7)" }}>
+                Total Swaps
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold mb-1" style={{ color: "#10B981" }}>
+                {formatUSD(userStats.totalVolumeUSD)}
+              </div>
+              <div className="text-sm" style={{ color: "rgba(251, 250, 249, 0.7)" }}>
+                Total Volume
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold mb-1" style={{ color: "#A0055D" }}>
+              {formatNumber(Number(userStats.liquidityProvided) / 1e18 , 8)}
+              </div>
+              <div className="text-sm" style={{ color: "rgba(251, 250, 249, 0.7)" }}>
+                LP Tokens
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold mb-1" style={{ color: "#F59E0B" }}>
+                {formatUSD(userStats.feesEarned)}
+              </div>
+              <div className="text-sm" style={{ color: "rgba(251, 250, 249, 0.7)" }}>
+                Fees Earned
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Price Chart */}
       <div className="glass rounded-2xl p-4 sm:p-6 lg:p-8 border border-white/10 shadow-2xl">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4 sm:mb-6 space-y-4 lg:space-y-0">

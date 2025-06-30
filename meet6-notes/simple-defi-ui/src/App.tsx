@@ -1,4 +1,4 @@
-import Header from "./components/Header.tsx";
+import Header from "./components/Header";
 import '@rainbow-me/rainbowkit/styles.css';
 
 import {
@@ -14,7 +14,9 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
-import DEXContainer from "./components/DEXContainer.tsx";
+import DEXContainer from "./components/DEXContainer";
+import { ApolloProvider } from '@apollo/client';
+import { apolloClient } from './lib/graphql';
 
 // Konfigurasi Chain Monad Testnet
 const monadTestnet: Chain = {
@@ -54,15 +56,18 @@ function App() {
   const queryClient = new QueryClient();
   return (
     <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>
-          <div className="min-h-screen">
-            <Header />
-            <DEXContainer />
-          </div>
-          <Toaster position="top-center" />
-        </RainbowKitProvider>
-      </QueryClientProvider>
+      <ApolloProvider client={apolloClient}>
+        <QueryClientProvider client={queryClient}>
+          <RainbowKitProvider>
+            <div className="min-h-screen">
+              <Header />
+              <DEXContainer />
+            </div>
+            <Toaster position="top-center" />
+          </RainbowKitProvider>
+        </QueryClientProvider>
+      </ApolloProvider>
+     
     </WagmiProvider>
   )
 }
