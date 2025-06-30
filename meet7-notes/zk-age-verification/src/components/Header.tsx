@@ -8,7 +8,7 @@ const Header = () => {
           <div className="relative">
             <div className="flex items-center space-x-1 p-2 rounded-xl bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-white/10">
               <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold">
-                🆔
+                <img src="/src/assets/padlock.png" alt="ZK Age Verify Logo" className="w-6 h-6" />
               </div>
             </div>
           </div>
