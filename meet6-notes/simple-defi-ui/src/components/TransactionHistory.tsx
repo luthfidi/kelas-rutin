@@ -4,7 +4,7 @@ import { useState, useMemo } from "react"
 import { ArrowUpDown, Plus, Minus, ExternalLink, Search, RefreshCw } from "lucide-react"
 import { useAccount } from "wagmi"
 import { useRecentSwaps, useLiquidityEvents, useIndexerHealth, useManualRefresh } from "../hooks/useIndexerData"
-import { formatTokenAmount, formatTime, formatAddress, formatNumber, formatUSD } from "../utils/formatters"
+import { formatTime, formatAddress, formatNumber } from "../utils/formatters"
 import type { SwapData, LiquidityEventData } from "../hooks/useIndexerData"
 
 interface CombinedTransaction {

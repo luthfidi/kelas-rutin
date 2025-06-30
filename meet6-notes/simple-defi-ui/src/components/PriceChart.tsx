@@ -46,8 +46,8 @@ const PriceChart = () => {
   const [isLoadingHistory, setIsLoadingHistory] = useState(false)
   
   // Fetch data from indexer for analytics
-  const { data: recentSwaps, isLoading: swapsLoading } = useRecentSwaps(100)
-  const { data: userStats, isLoading: userLoading } = useUserStats(address)
+  const { data: recentSwaps } = useRecentSwaps(100)
+  const { data: userStats } = useUserStats(address)
   const { data: dailyVolume, isLoading: volumeLoading } = useDailyVolume(7)
   const { data: indexerHealth } = useIndexerHealth()
   const { refreshAll } = useManualRefresh()
