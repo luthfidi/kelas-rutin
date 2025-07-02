@@ -23,6 +23,13 @@ Repository tugas dan project dari Kelas Rutin BlockDevId - Web3 Fundamentals & S
 
 **Referensi Soal**: [Soal Meet 2](https://docs.ethjkt.com/docs/Tutorial/Kelas-Rutin-BlockDevId/Sesi-2-Smart-Contract-Modular-Architecture/sesi-2#tantangan-2-kampus-token-suite-implementation)
 
+### Meet 5 - Hackathon Simulation
+**QurbanChain - Blockchain-based Qurban Management System**
+
+**Live Website**: [https://qurban-chain.vercel.app](https://qurban-chain.vercel.app)  
+**Repository**: [https://github.com/luthfidi/QurbanChain](https://github.com/luthfidi/QurbanChain)  
+**Presentation**: [View PPT](https://www.canva.com/design/DAGqZ_m9E4g/vqtH15zedWdFPskl8-kvww/view?utm_content=DAGqZ_m9E4g&utm_campaign=designshare&utm_medium=link&utm_source=viewer)
+
 ### Meet 6 - DeFi
 **Decentralized Exchange Implementation**
 
@@ -30,14 +37,14 @@ Repository tugas dan project dari Kelas Rutin BlockDevId - Web3 Fundamentals & S
 2. **CampusCoin** - [0x39b5aC632F550b0f3cD39180c0912e29DBc68De3](https://testnet.monadexplorer.com/address/0x39b5aC632F550b0f3cD39180c0912e29DBc68De3?tab=Contract)
 3. **MockUSDC** - [0x3DA1769802400490E47C8D20fee171D81c89d208](https://testnet.monadexplorer.com/address/0x3DA1769802400490E47C8D20fee171D81c89d208?tab=Contract)
 
-**Live Website**: [https://nadtrade-dex.vercel.app](https://nadtrade-dex.vercel.app)  
+**Live Website**: [https://nadtrade-dex.vercel.app/](https://nadtrade-dex.vercel.app/)  
 **Indexer**: [https://github.com/luthfidi/simple-dex-indexer](https://github.com/luthfidi/simple-dex-indexer)
 
 ### Meet 7 - Zero Knowledge Proofs
 **ZK Age Verification System**
 
 **Contract**: [0xD80e970e135B153561372205c6549dDE4573cF5e](https://testnet.monadexplorer.com/address/0xD80e970e135B153561372205c6549dDE4573cF5e?tab=Contract)  
-**Live Website**: [https://zk-age-verification.vercel.app](https://zk-age-verification.vercel.app)
+**Live Website**: [https://zk-age-verification.vercel.app/](https://zk-age-verification.vercel.app/)
 
 ## 👨‍💻 Developer
 **luthfidi** - BlockDevId Kelas Rutin Participant
